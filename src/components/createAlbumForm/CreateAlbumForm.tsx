@@ -1,4 +1,5 @@
 import { AlbumModel, CreateAlbumModel } from "@/models/album";
+import { format } from "date-fns";
 import {
   BlurContainer,
   CreateAlbum,
@@ -20,16 +21,15 @@ const CreateAlbumForm: React.FC<CreateAlbumProps> = ({
   isFormUpOpen,
   albums,
 }) => {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const [creatorName, setCreator] = useState("");
   const handleAddAlbum = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const newAlbum: CreateAlbumModel = {
-        title,
+        name,
         location,
-        dataPicker: creatorName,
+        date: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
       };
       const createdAlbum = await addAlbum(newAlbum);
       albums.push(createdAlbum);
@@ -56,9 +56,9 @@ const CreateAlbumForm: React.FC<CreateAlbumProps> = ({
           <div className="form-element">
             <input
               className="input"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
@@ -68,15 +68,6 @@ const CreateAlbumForm: React.FC<CreateAlbumProps> = ({
               placeholder="Location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-element">
-            <input
-              className="input"
-              placeholder="Creator Name"
-              value={creatorName}
-              onChange={(e) => setCreator(e.target.value)}
               required
             />
           </div>

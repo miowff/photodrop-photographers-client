@@ -1,10 +1,10 @@
 export interface AlbumModel {
   id: string;
-  title: string;
+  name: string;
   location: string;
 }
 export interface CreateAlbumModel {
-  title: string;
+  name: string;
   location: string;
-  dataPicker: string;
+  date: string;
 }
