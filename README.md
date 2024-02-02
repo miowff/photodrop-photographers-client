@@ -4,7 +4,7 @@ Should return array of albums with type:
 
 {
 id: string;
-title: string;
+name: string;
 location: string;
 }
 
@@ -14,7 +14,7 @@ Should return album with type:
 
 {
 id: string;
-title: string;
+name: string;
 location: string;
 }
 
