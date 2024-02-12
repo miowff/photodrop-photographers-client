@@ -1,10 +1,7 @@
-export interface AttachUsersToPhoto {
-  albumId: string;
-  userPhotoMap: string;
-}
 
 export interface PhotoData {
-  albumId: string;
+  albumId: number;
+  name: string;
   type: string;
 }
 
@@ -13,5 +10,14 @@ export interface RequestLinks {
 }
 export interface AttachPhotoInfo {
   id: string;
-  albumId: string;
+  albumId: number;
+  realName: string;
+}
+export interface AttachUsersToPhoto {
+  image: Image;
+  clientsId: number[];
+}
+interface Image {
+  id: string;
+  albumId: number;
 }

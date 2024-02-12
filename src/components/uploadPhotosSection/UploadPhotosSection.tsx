@@ -16,9 +16,10 @@ import {
 import AddUsersForm from "../addUsersToPhotoForm/AddUsersForm";
 import { useParams } from "react-router-dom";
 import AttachNumbersAlert from "./AttachNumbersAlert";
-import { getAvailableNumbers } from "@/api";
+import { attachUsersToPhoto, getAvailableNumbers } from "@/api";
 import { uploadPhotos } from "@/utils/photosUploader";
 import { AvailableUser } from "@/models/user";
+import { AttachUsersToPhoto } from "@/models/photo";
 
 const UploadPhotosSection = () => {
   const { id } = useParams();
@@ -56,13 +57,26 @@ const UploadPhotosSection = () => {
       return;
     }
     setIsLoading(true);
-    /*await attachUsersToPhoto({
-      albumId: id as string,
-      userPhotoMap: selectedNumbersMapToJSON(selectedPhoneNumbers),
-    });*/
-    console.log(selectedUsers);
-    const a = await uploadPhotos(selectedImages, id as string);
-    console.log(a);
+    const photoInfo = await uploadPhotos(selectedImages, id as string);
+    const attachUsersRequest: AttachUsersToPhoto[] = [];
+    photoInfo.forEach(({ realName, albumId, id }) => {
+      const users = selectedUsers.get(realName);
+      if (users) {
+        const clientsIds = users?.map(({ id }) => id);
+        const a = {
+          image: {
+            id,
+            albumId,
+          },
+          clientsId: clientsIds,
+        };
+        attachUsersRequest.push(a);
+      }
+    });
+    setTimeout(async () => {
+      await attachUsersToPhoto(attachUsersRequest);
+      console.log("Attached users to photo");
+    }, 5000);
     setSelectedImages([]);
     setIsLoading(false);
   };

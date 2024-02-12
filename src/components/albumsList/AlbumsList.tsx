@@ -32,7 +32,7 @@ function AlbumsList() {
       }
     };
     fetchData();
-  }, []);
+  }, [navigate]);
   return (
     <Container>
       <ButtonContainer>

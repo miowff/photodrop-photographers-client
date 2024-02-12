@@ -49,22 +49,21 @@ export const requestUploadUrls = async (requestLinks: RequestLinks) => {
       Authorization: `Bearer ${authToken}`,
     },
   });
-  console.log(response);
   return response.data;
 };
 export const attachUsersToPhoto = async (
-  attachUsersToPhoto: AttachUsersToPhoto
+  attachUsersToPhoto: AttachUsersToPhoto[]
 ) => {
   const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
-  await httpClient.post<AttachUsersToPhoto>(
-    "/attach-users-to-photo",
-    attachUsersToPhoto,
-    {
-      headers: {
-        Authorization: authToken,
-      },
-    }
-  );
+  const request = {
+    imagesClients: attachUsersToPhoto,
+  };
+  console.log(request);
+  await httpClient.post<AttachUsersToPhoto>("/attachClients", request, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
 };
 export const getAvailableNumbers = async () => {
   const authToken = localStorage.getItem(AUTH_TOKEN_KEY);

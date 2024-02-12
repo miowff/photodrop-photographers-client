@@ -1,6 +1,10 @@
 export interface PresignedUrl {
   url: string;
-  fields: Fields;
+  realName: string;
+  post: {
+    fields: Fields;
+    url: string;
+  };
 }
 
 interface Fields {

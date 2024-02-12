@@ -1,23 +1,24 @@
 import { requestUploadUrls } from "@/api";
 import { AttachPhotoInfo, PhotoData } from "@/models/photo";
 import { PresignedUrl } from "@/models/url";
-
+import axios from "axios";
 
 export const uploadPhotos = async (
   selectedImages: File[],
-  albumId: string
+  id: string
 ): Promise<AttachPhotoInfo[]> => {
+  const albumId = parseInt(id);
   const photosData: PhotoData[] = selectedImages.map((photo) => {
-    const { type } = photo;
-    return { type, albumId };
+    const { type, name } = photo;
+    return { type, albumId, name };
   });
   const attachPhotosData: AttachPhotoInfo[] = [];
   const responseUrls = (await requestUploadUrls({
     images: photosData,
   })) as PresignedUrl[];
   await Promise.all(
-    responseUrls.map(async (responseUrl, index) => {
-      const { fields } = responseUrl;
+    responseUrls.map(async (url, index) => {
+      const { fields, url: uploadUrl } = url.post;
       const formData = new FormData();
       for (const [key, value] of Object.entries(fields)) {
         formData.append(key, value);
@@ -26,13 +27,14 @@ export const uploadPhotos = async (
           attachPhotosData.push({
             id: splittedKey[splittedKey.length - 1],
             albumId,
+            realName: url.realName,
           });
         }
       }
       formData.append("file", selectedImages[index]);
-      /*await axios.post(url, formData, {
+      await axios.post(uploadUrl, formData, {
         headers: { "Content-Type": "multipart/form-data" },
-      });*/
+      });
     })
   );
   return attachPhotosData;
