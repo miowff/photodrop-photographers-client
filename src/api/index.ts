@@ -3,7 +3,7 @@ import { BASE_URL } from "@/enums/baseUrl";
 import { AccessTokenResponse } from "@/models/accessTokenResponse";
 import { AlbumModel, CreateAlbumModel } from "@/models/album";
 import { AttachUsersToPhoto, RequestLinks } from "@/models/photo";
-import { LoginModel } from "@/models/user";
+import { AvailableUser, LoginModel } from "@/models/user";
 import axios from "axios";
 
 const httpClient = axios.create({
@@ -13,7 +13,7 @@ export const getAlbums = async () => {
   const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
   const albums = await httpClient.get<AlbumModel[]>(`/albums`, {
     headers: {
-      Authorization: authToken,
+      Authorization: `Bearer ${authToken}`,
     },
   });
   return albums.data;
@@ -22,9 +22,8 @@ export const addAlbum = async (
   album: CreateAlbumModel
 ): Promise<AlbumModel> => {
   const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
-  console.log(authToken);
   const response = await httpClient.post<CreateAlbumModel, AlbumModel>(
-    "/photographers/uploadAlbum",
+    "/uploadAlbum",
     album,
     {
       headers: {
@@ -32,11 +31,12 @@ export const addAlbum = async (
       },
     }
   );
+  console.log(response);
   return response;
 };
 export const signIn = async (loginRequest: LoginModel) => {
   const response = await httpClient.post<LoginModel, AccessTokenResponse>(
-    "/photographers/auth",
+    "/auth",
     loginRequest
   );
   const token = response.data;
@@ -67,9 +67,9 @@ export const attachUsersToPhoto = async (
 };
 export const getAvailableNumbers = async () => {
   const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
-  const response = await httpClient.get<string[]>("/available-numbers", {
+  const response = await httpClient.get<AvailableUser[]>("/getClients", {
     headers: {
-      Authorization: authToken,
+      Authorization: `Bearer ${authToken}`,
     },
   });
   return response.data;

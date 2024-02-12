@@ -19,13 +19,14 @@ import AttachNumbersAlert from "./AttachNumbersAlert";
 import { selectedNumbersMapToJSON } from "@/utils/mapToJSON";
 import { attachUsersToPhoto, getAvailableNumbers } from "@/api";
 import { uploadPhotos } from "@/utils/photosUploader";
+import { AvailableUser } from "@/models/user";
 
 const UploadPhotosSection = () => {
   const { id } = useParams();
   const [alertMessage, setAlertMessage] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [usersNumbers, setUsersNumbers] = useState<string[]>([]);
+  const [usersNumbers, setUsersNumbers] = useState<AvailableUser[]>([]);
   const [isUserSelectionVisible, setIsSectionVisible] = useState(false);
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(

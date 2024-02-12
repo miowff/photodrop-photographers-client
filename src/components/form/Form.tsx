@@ -23,7 +23,7 @@ function Form() {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const { accessToken } = await signIn({ password, login });
+      const accessToken = await signIn({ password, login });
       localStorage.setItem(AUTH_TOKEN_KEY, accessToken);
       navigate("/");
     } catch (error) {

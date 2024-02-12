@@ -9,3 +9,7 @@ export interface LoginModel {
   password: string;
   login: string;
 }
+export interface AvailableUser {
+  number: string;
+  id: number;
+}

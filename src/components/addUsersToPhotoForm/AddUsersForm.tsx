@@ -4,6 +4,7 @@ import {
   FormContainer,
   NumbersContainer,
 } from "./addUsersFormStyles";
+import { AvailableUser } from "@/models/user";
 
 export interface UsersPhoto {
   phoneNumbers: string[];
@@ -11,7 +12,7 @@ export interface UsersPhoto {
 }
 
 interface UsersProps {
-  usersNumbers: string[];
+  usersNumbers: AvailableUser[];
   photoKey: string;
   existingUsersPhoto: Map<string, string[]>;
   onClose: () => void;
@@ -51,7 +52,7 @@ const AddUsersForm: React.FC<UsersProps> = ({
     onClose();
   };
 
-  const filteredUsers = usersNumbers.filter((number: string) =>
+  const filteredUsers = usersNumbers.filter(({ number }) =>
     number.includes(searchTerm)
   );
 
@@ -66,13 +67,13 @@ const AddUsersForm: React.FC<UsersProps> = ({
       <div>
         <NumbersContainer>
           <ul>
-            {filteredUsers.map((number, index) => (
+            {filteredUsers.map(({ number }, index) => (
               <li key={index}>
                 <input
                   type="checkbox"
                   onChange={() => handleCheckboxChange(number)}
                 />
-                <span>+{number}</span>
+                <span>{number}</span>
               </li>
             ))}
           </ul>
