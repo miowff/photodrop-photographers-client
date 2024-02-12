@@ -1,12 +1,10 @@
-import Form from "@/components/form/Form";
-import Header from "@/components/header/Header";
+import { LoginForm } from "@/components/LoginForm/LoginFrom";
 
 const Login = () => {
   return (
-    <div>
-      <Header />
-      <Form />
-    </div>
+    <section>
+      <LoginForm />
+    </section>
   );
 };
 export default Login;

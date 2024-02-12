@@ -1,12 +1,12 @@
-import Header from "@/components/header/Header";
-import UploadPhotosSection from "@/components/uploadPhotosSection/UploadPhotosSection";
+import { Header } from "@/components/Header/Header";
+import { PhotosInput } from "@/components/PhotosInput/PhotosInput";
 
 const AlbumContent = () => {
   return (
-    <div className="album">
+    <>
       <Header />
-      <UploadPhotosSection />
-    </div>
+      <PhotosInput />
+    </>
   );
 };
 export default AlbumContent;

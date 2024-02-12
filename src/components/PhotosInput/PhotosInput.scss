@@ -1,0 +1,133 @@
+.photos-input {
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+
+    &__header-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    &__title {
+        font-family: TerminaBold, FuturaPtDemi;
+        font-size: 30px;
+    }
+
+    &__controls {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        font-family: FuturaPtMedium;
+    }
+
+    &__control-button {
+        width: 65px;
+        height: 30px;
+        border: none;
+        background-color: #C6C6C6;
+    }
+
+    &__control-button:disabled {
+        opacity: 0.9;
+    }
+
+    &__input-wrapper {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            position: relative;
+            z-index: 0;
+            display: inline-block;
+            width: 65px;
+            height: 30px;
+            background-color: #89CFF0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    }
+
+    &__disabled-input {
+        opacity: 0.7;
+
+        a {
+            opacity: 0.7 !important;
+        }
+    }
+
+    &__input-photos {
+        display: inline-block;
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        height: 50px;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    &__photos-grid {
+        margin-top: 20px;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        margin-bottom: 20px;
+
+        img {
+            max-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    &__photo-container {
+        position: relative;
+    }
+
+    &__photo-controls {
+        top: 10px;
+        left: 10px;
+        position: absolute;
+    }
+
+    &__photo-controls {
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    &__add-user-control {
+        width: 40px;
+        height: 30px;
+    }
+
+    &__add-user-control-icon {
+        object-fit: cover;
+    }
+
+}

@@ -1,33 +1,47 @@
-import { Container } from "@/globalStyle";
-import headerLogo from "./assets/photoDropLogo.svg";
-import { HeaderContent, LogOutButton, Logo } from "./HeaderStyles";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import PhotoDropLogo from "../../public/photoDropLogo.svg";
+import UserIcon from "../../public/userIcon.svg";
 import { AUTH_TOKEN_KEY } from "@/enums/authTokenKey";
 import { useNavigate } from "react-router-dom";
-function Header() {
-  const { pathname } = useLocation();
+export const Header = () => {
   const navigate = useNavigate();
-  const shouldRenderLogoutButton = pathname !== "/login";
-
+  const [isUserControlsVisible, setIsUserControlsVisible] = useState(false);
   const handleLogOut = () => {
     localStorage.removeItem(AUTH_TOKEN_KEY);
     navigate("/login");
   };
   return (
-    <Container>
-      <HeaderContent>
-        <Logo
-          onClick={() => {
-            window.location.href = "/";
-          }}
-        >
-          <img src={headerLogo} alt="Logo"></img>
-        </Logo>
-      </HeaderContent>
-      {shouldRenderLogoutButton && (
-        <LogOutButton onClick={handleLogOut}>Log out</LogOutButton>
-      )}
-    </Container>
+    <header className="header">
+      <div className="container">
+        <div className="header__content">
+          <img
+            className="header__logo"
+            src={PhotoDropLogo}
+            onClick={() => {
+              navigate("/");
+            }}
+          />
+          <div className="header__user">
+            <img
+              className="header__user-icon"
+              src={UserIcon}
+              onClick={() => {
+                setIsUserControlsVisible(!isUserControlsVisible);
+              }}
+            />
+            {isUserControlsVisible && (
+              <div className="header__user-controls">
+                <button
+                  className="header__user-controls-button"
+                  onClick={handleLogOut}
+                >
+                  Log Out
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </header>
   );
-}
-export default Header;
+};

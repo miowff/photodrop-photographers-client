@@ -1,0 +1,68 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 250px;
+
+    &__inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__title {
+        color: #262626;
+        font-family: TerminaBold, FuturaPtDemi;
+        font-size: 30px;
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__button {
+        margin-top: 10px;
+        width: 420px;
+        height: 50px;
+        background-color: #30C;
+        color: #FFF;
+        font-family: FuturaPtMedium;
+        border: none;
+        font-size: 22px;
+        line-height: 15px;
+        border-radius: 30px;
+    }
+
+    &__button:disabled {
+        opacity: 0.3;
+    }
+
+    &__input {
+        width: 420px;
+        height: 40px;
+        border: none;
+        font-family: FuturaPtMedium;
+        color: #262626;
+        font-size: 20px;
+        padding-left: 13px;
+        border: 1px solid gray;
+        border-radius: 30px;
+    }
+}
+
+@media (max-width:1024px) {
+    .login-form {
+        &__title {
+            max-width: 288px;
+            font-size: 22px;
+        }
+
+        &__input {
+            max-width: 345px;
+            font-size: 16px;
+        }
+
+        &__button {
+            width: 345px;
+            font-size: 18px;
+        }
+    }
+}

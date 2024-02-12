@@ -1,0 +1,33 @@
+.add-users {
+    z-index: 150;
+    position: absolute;
+    background-color: white;
+
+    padding: 10px;
+    box-shadow: 10px 5px 5px gray;
+    display: flex;
+    flex-direction: column;
+    font-family: FuturaPtMedium;
+    font-size: 15px;
+    border-radius: 16px;
+    top: 50px;
+    left: 10px;
+
+    &__buttons {
+        display: flex;
+        flex-direction: row;
+        margin-top: 10px;
+    }
+
+    &__button {
+        border: none;
+    }
+
+    &__add {
+        background-color: #89CFF0;
+    }
+
+    &__close {
+        background-color: #C6C6C6;
+    }
+}

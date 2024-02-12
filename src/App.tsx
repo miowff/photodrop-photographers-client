@@ -5,7 +5,7 @@ import Login from "./pages/Login";
 import { PrivateWrapper } from "./utils/protectedRoute";
 function App() {
   return (
-    <div>
+    <div className="wrapper">
       <Routes>
         <Route
           path="/"

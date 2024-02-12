@@ -1,11 +1,13 @@
-import AlbumsList from "@/components/albumsList/AlbumsList";
-import Header from "@/components/header/Header";
+import { Albums } from "@/components/Albums/Albums";
+import { Header } from "@/components/Header/Header";
 
 const Home = () => {
   return (
-    <div className="home">
+    <div>
       <Header />
-      <AlbumsList />
+      <section className="home">
+        <Albums />
+      </section>
     </div>
   );
 };
