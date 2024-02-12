@@ -1,7 +1,9 @@
 export interface AlbumModel {
-  id: string;
+  id: number;
   name: string;
   location: string;
+  date: string;
+  photographerId: number;
 }
 export interface CreateAlbumModel {
   name: string;

@@ -4,11 +4,10 @@ export interface AttachUsersToPhoto {
 }
 
 export interface PhotoData {
-  name: string;
+  albumId: string;
   type: string;
 }
 
 export interface RequestLinks {
-  photosData: PhotoData[];
-  albumId: string;
+  images: PhotoData[];
 }

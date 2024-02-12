@@ -1,16 +1,16 @@
 import { requestUploadUrls } from "@/api";
+import { PhotoData } from "@/models/photo";
 import { PresignedUrl } from "@/models/url";
 import axios from "axios";
 
 export const uploadPhotos = async (selectedImages: File[], albumId: string) => {
-  const photosData = selectedImages.map((photo) => {
-    const { name, type } = photo;
-    return { name, type };
+  const photosData: PhotoData[] = selectedImages.map((photo) => {
+    const { type } = photo;
+    return { type, albumId };
   });
 
   const responseUrls = (await requestUploadUrls({
-    photosData,
-    albumId,
+    images: photosData,
   })) as PresignedUrl[];
   await Promise.all(
     responseUrls.map(async (responseUrl, index) => {

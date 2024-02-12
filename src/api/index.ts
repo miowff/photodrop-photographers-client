@@ -44,11 +44,12 @@ export const signIn = async (loginRequest: LoginModel) => {
 };
 export const requestUploadUrls = async (requestLinks: RequestLinks) => {
   const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
-  const response = await httpClient.post("/request-upload-urls", requestLinks, {
+  const response = await httpClient.post("/imagesPresignedPost", requestLinks, {
     headers: {
-      Authorization: authToken,
+      Authorization: `Bearer ${authToken}`,
     },
   });
+  console.log(response);
   return response.data;
 };
 export const attachUsersToPhoto = async (

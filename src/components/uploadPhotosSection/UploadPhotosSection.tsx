@@ -16,8 +16,8 @@ import {
 import AddUsersForm from "../addUsersToPhotoForm/AddUsersForm";
 import { useParams } from "react-router-dom";
 import AttachNumbersAlert from "./AttachNumbersAlert";
-import { selectedNumbersMapToJSON } from "@/utils/mapToJSON";
-import { attachUsersToPhoto, getAvailableNumbers } from "@/api";
+
+import { getAvailableNumbers } from "@/api";
 import { uploadPhotos } from "@/utils/photosUploader";
 import { AvailableUser } from "@/models/user";
 
@@ -57,10 +57,10 @@ const UploadPhotosSection = () => {
       return;
     }
     setIsLoading(true);
-    await attachUsersToPhoto({
+    /*await attachUsersToPhoto({
       albumId: id as string,
       userPhotoMap: selectedNumbersMapToJSON(selectedPhoneNumbers),
-    });
+    });*/
     await uploadPhotos(selectedImages, id as string);
     setSelectedImages([]);
     setIsLoading(false);

@@ -29,7 +29,7 @@ const CreateAlbumForm: React.FC<CreateAlbumProps> = ({
       const newAlbum: CreateAlbumModel = {
         name,
         location,
-        date: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
+        date: format(new Date(), "yyyy-MM-dd"),
       };
       const createdAlbum = await addAlbum(newAlbum);
       albums.push(createdAlbum);
