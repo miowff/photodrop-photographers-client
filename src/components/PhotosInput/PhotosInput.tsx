@@ -134,7 +134,7 @@ export const PhotosInput = () => {
                 placeholder="Upload photos"
                 multiple
                 onChange={handleImageChange}
-                disabled={!isLoading}
+                disabled={isLoading}
               ></input>
             </div>
             <button
