@@ -12,47 +12,45 @@ export interface UsersPhoto {
 }
 
 interface UsersProps {
-  usersNumbers: AvailableUser[];
+  users: AvailableUser[];
   photoKey: string;
-  existingUsersPhoto: Map<string, string[]>;
+  existingUsersPhoto: Map<string, AvailableUser[]>;
   onClose: () => void;
-  onSelectedPhoneNumbers: (usersPhoto: Map<string, string[]>) => void;
+  onSelectedPhoneNumbers: (usersPhoto: Map<string, AvailableUser[]>) => void;
 }
 
 const AddUsersForm: React.FC<UsersProps> = ({
-  usersNumbers,
+  users,
   photoKey,
   existingUsersPhoto,
   onClose,
   onSelectedPhoneNumbers,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedPhoneNumbers, setSelectedPhoneNumbers] = useState<string[]>(
-    []
-  );
+  const [selectedUsers, setSelectedUsers] = useState<AvailableUser[]>([]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleCheckboxChange = (phoneNumber: string) => {
-    setSelectedPhoneNumbers((prevPhoneNumbers) => {
-      if (prevPhoneNumbers.includes(phoneNumber)) {
-        return prevPhoneNumbers.filter((num) => num !== phoneNumber);
+  const handleCheckboxChange = (user: AvailableUser) => {
+    setSelectedUsers((prevUsers) => {
+      if (prevUsers.includes(user)) {
+        return prevUsers.filter((existsUser) => existsUser !== user);
       } else {
-        return [...prevPhoneNumbers, phoneNumber];
+        return [...prevUsers, user];
       }
     });
   };
 
   const handleAddButtonClick = () => {
     existingUsersPhoto.delete(photoKey);
-    existingUsersPhoto.set(photoKey, selectedPhoneNumbers);
+    existingUsersPhoto.set(photoKey, selectedUsers);
     onSelectedPhoneNumbers(existingUsersPhoto);
     onClose();
   };
 
-  const filteredUsers = usersNumbers.filter(({ number }) =>
+  const filteredUsers = users.filter(({ number }) =>
     number.includes(searchTerm)
   );
 
@@ -67,13 +65,13 @@ const AddUsersForm: React.FC<UsersProps> = ({
       <div>
         <NumbersContainer>
           <ul>
-            {filteredUsers.map(({ number }, index) => (
+            {filteredUsers.map((user, index) => (
               <li key={index}>
                 <input
                   type="checkbox"
-                  onChange={() => handleCheckboxChange(number)}
+                  onChange={() => handleCheckboxChange(user)}
                 />
-                <span>{number}</span>
+                <span>{user.number}</span>
               </li>
             ))}
           </ul>

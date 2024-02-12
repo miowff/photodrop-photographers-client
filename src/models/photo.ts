@@ -11,3 +11,7 @@ export interface PhotoData {
 export interface RequestLinks {
   images: PhotoData[];
 }
+export interface AttachPhotoInfo {
+  id: string;
+  albumId: string;
+}

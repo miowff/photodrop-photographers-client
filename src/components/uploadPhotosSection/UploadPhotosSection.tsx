@@ -16,7 +16,6 @@ import {
 import AddUsersForm from "../addUsersToPhotoForm/AddUsersForm";
 import { useParams } from "react-router-dom";
 import AttachNumbersAlert from "./AttachNumbersAlert";
-
 import { getAvailableNumbers } from "@/api";
 import { uploadPhotos } from "@/utils/photosUploader";
 import { AvailableUser } from "@/models/user";
@@ -26,20 +25,20 @@ const UploadPhotosSection = () => {
   const [alertMessage, setAlertMessage] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [usersNumbers, setUsersNumbers] = useState<AvailableUser[]>([]);
+  const [users, setUsers] = useState<AvailableUser[]>([]);
   const [isUserSelectionVisible, setIsSectionVisible] = useState(false);
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
-  const [selectedPhoneNumbers, setSelectedPhoneNumbers] = useState<
-    Map<string, string[]>
+  const [selectedUsers, setSelectedUsers] = useState<
+    Map<string, AvailableUser[]>
   >(new Map());
   useEffect(() => {
     const fetchUsersNumbers = async () => {
       try {
         const data = await getAvailableNumbers();
-        setUsersNumbers(data);
+        setUsers(data);
       } catch (error) {
         console.error("Error fetching usersNumbers:", error);
       }
@@ -47,7 +46,7 @@ const UploadPhotosSection = () => {
     fetchUsersNumbers();
   }, []);
   const handleUploadClick = async () => {
-    if (selectedImages.length !== selectedPhoneNumbers.size) {
+    if (selectedImages.length !== selectedUsers.size) {
       setAlertMessage(
         "Please select phone numbers for all images before uploading."
       );
@@ -61,15 +60,17 @@ const UploadPhotosSection = () => {
       albumId: id as string,
       userPhotoMap: selectedNumbersMapToJSON(selectedPhoneNumbers),
     });*/
-    await uploadPhotos(selectedImages, id as string);
+    console.log(selectedUsers);
+    const a = await uploadPhotos(selectedImages, id as string);
+    console.log(a);
     setSelectedImages([]);
     setIsLoading(false);
   };
 
   const handleSelectedPhoneNumbersFromChild = (
-    phoneNumbers: Map<string, string[]>
+    users: Map<string, AvailableUser[]>
   ) => {
-    setSelectedPhoneNumbers(phoneNumbers);
+    setSelectedUsers(users);
   };
 
   const handleClearPhotos = () => {
@@ -80,7 +81,7 @@ const UploadPhotosSection = () => {
   const handleImageRemove = (index: number) => {
     const updatedImages = [...selectedImages];
     updatedImages.splice(index, 1);
-    selectedPhoneNumbers.delete(selectedImages[index].name);
+    selectedUsers.delete(selectedImages[index].name);
     setSelectedImages(updatedImages);
     if (index === selectedImageIndex) {
       setSelectedImageIndex(null);
@@ -91,12 +92,17 @@ const UploadPhotosSection = () => {
     const files = event.target.files;
     if (files) {
       const newSelectedImages: File[] = [];
-
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        newSelectedImages.push(file);
+        const isDuplicate = selectedImages.some(
+          (selectedFile) => selectedFile.name === file.name
+        );
+        if (!isDuplicate) {
+          newSelectedImages.push(file);
+        } else {
+          console.log(`File with name ${file.name} already exists.`);
+        }
       }
-
       setSelectedImages((prevSelectedImages) => [
         ...prevSelectedImages,
         ...newSelectedImages,
@@ -141,10 +147,10 @@ const UploadPhotosSection = () => {
                 <img src={URL.createObjectURL(image)} alt={`Image ${index}`} />
                 {isUserSelectionVisible && selectedImageIndex === index && (
                   <AddUsersForm
-                    usersNumbers={usersNumbers}
+                    users={users}
                     onClose={handleCloseForm}
                     photoKey={image.name}
-                    existingUsersPhoto={selectedPhoneNumbers}
+                    existingUsersPhoto={selectedUsers}
                     onSelectedPhoneNumbers={handleSelectedPhoneNumbersFromChild}
                   ></AddUsersForm>
                 )}
