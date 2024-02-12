@@ -22,17 +22,13 @@ export const addAlbum = async (
   album: CreateAlbumModel
 ): Promise<AlbumModel> => {
   const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
-  const response = await httpClient.post<CreateAlbumModel, AlbumModel>(
-    "/uploadAlbum",
-    album,
-    {
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-      },
-    }
-  );
+  const response = await httpClient.post("/uploadAlbum", album, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+    },
+  });
   console.log(response);
-  return response;
+  return response.data as AlbumModel;
 };
 export const signIn = async (loginRequest: LoginModel) => {
   const response = await httpClient.post<LoginModel, AccessTokenResponse>(
