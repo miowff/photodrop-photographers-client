@@ -1,5 +1,5 @@
-import { Albums } from "../components/Albums/Albums";
-import { Header } from "../components/Header/Header";
+import { Albums } from "../components/Albums/albums";
+import { Header } from "../components/Header/header";
 
 const Home = () => {
   return (

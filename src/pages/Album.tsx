@@ -1,4 +1,4 @@
-import { Header } from "../components/Header/Header";
+import { Header } from "../components/Header/header";
 import { PhotosInput } from "../components/PhotosInput/PhotosInput";
 
 const AlbumContent = () => {
