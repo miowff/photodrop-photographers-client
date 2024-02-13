@@ -58,14 +58,17 @@
     }
 
     &__close {
+        width: 25px;
+        height: 25px;
         cursor: pointer;
-
     }
 
     &__form-title {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
+        justify-content: center;
     }
 
     &__form-header {

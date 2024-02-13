@@ -1,11 +1,11 @@
 import { AlbumModel } from "@/models/album";
+import AlbumIcon from "/album.svg";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
-import { AlbumSvg } from "../../../../public/svg/AlbumSvg";
 interface Props {
   album: AlbumModel;
 }
-export const Album = ({ album }: Props) => {
+export const AlbumCard = ({ album }: Props) => {
   const navigate = useNavigate();
   return (
     <div
@@ -16,7 +16,7 @@ export const Album = ({ album }: Props) => {
     >
       <div className="album__inner">
         <div className="album__content">
-          <AlbumSvg />
+          <img className="album__icon" src={AlbumIcon} />
           <div className="album__info">
             <h1 className="album__title">{album.name}</h1>
             <p className="album__location">{album.location}</p>

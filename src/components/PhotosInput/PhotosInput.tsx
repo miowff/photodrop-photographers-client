@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import PlusIcon from "/plus.svg";
 import Close from "/close.svg";
 import AddMembers from "/members-add-users.svg";
 import { AvailableUser } from "@/models/user";
@@ -7,8 +6,8 @@ import { attachUsersToPhoto, getAvailableNumbers } from "@/api";
 import { uploadPhotos } from "@/utils/photosUploader";
 import { AttachUsersToPhoto } from "@/models/photo";
 import { useParams } from "react-router-dom";
-import { Alert } from "../Alert/Alert";
-import { AddUsers } from "./addUsers/AddUsers";
+import { Alert } from "../alert/Alert";
+import { AddUsers } from "../photosInput/addUsers/AddUsers";
 
 export const PhotosInput = () => {
   const { id } = useParams();
@@ -126,7 +125,6 @@ export const PhotosInput = () => {
       <div className="container">
         <div className="photos-input__inner">
           <div className="photos-input__header">
-            <img className="photos-input__header-icon" src={PlusIcon} />
             <h1 className="photos-input__title">Add Photos</h1>
           </div>
           <div className="photos-input__controls">

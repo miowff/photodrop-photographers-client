@@ -1,5 +1,5 @@
-import { Header } from "@/components/Header/Header";
-import { PhotosInput } from "../components/PhotosInput/PhotosInput";
+import { Header } from "../components/header/Header";
+import { PhotosInput } from "../components/photosInput/PhotosInput";
 
 const AlbumContent = () => {
   return (

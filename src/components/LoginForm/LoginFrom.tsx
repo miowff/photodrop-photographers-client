@@ -8,7 +8,7 @@ import {
 import { BaseError } from "@/models/error";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Alert } from "../Alert/Alert";
+import { Alert } from "../alert/Alert";
 import { useHandleEnterPush } from "@/hooks/handleEnterPush";
 
 export const LoginForm = () => {

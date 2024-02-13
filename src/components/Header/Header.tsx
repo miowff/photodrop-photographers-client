@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PhotoDropLogo from "../../../public/photoDropLogo.svg";
+import PhotoDropLogo from "/photoDropLogo.svg";
 import UserIcon from "/userIcon.svg";
 import { AUTH_TOKEN_KEY } from "@/enums/authTokenKey";
 import { useNavigate } from "react-router-dom";
