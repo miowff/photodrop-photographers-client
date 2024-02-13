@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
-import PlusIcon from "../../public/plus.svg";
-import Close from "../../public/close.svg";
-import AddMembers from "../../public/members-add-users.svg";
+import PlusIcon from "/plus.svg";
+import Close from "/close.svg";
+import AddMembers from "/members-add-users.svg";
 import { AvailableUser } from "@/models/user";
 import { attachUsersToPhoto, getAvailableNumbers } from "@/api";
-import { Alert } from "../Alert/Alert";
 import { uploadPhotos } from "@/utils/photosUploader";
 import { AttachUsersToPhoto } from "@/models/photo";
 import { useParams } from "react-router-dom";
-import { AddUsers } from "./AddUsers/AddUsers";
+import { Alert } from "../Alert/Alert";
+import { AddUsers } from "./addUsers/AddUsers";
+
 export const PhotosInput = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isUserSelectionVisible, setIsSectionVisible] = useState(false);
+  const [isPhotosSent, setIsPhotosSent] = useState(false);
   const [selectedImages, setSelectedImages] = useState<File[]>([]);
   const [users, setUsers] = useState<AvailableUser[]>([]);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
@@ -71,6 +73,7 @@ export const PhotosInput = () => {
     }, 5000);
     setSelectedImages([]);
     setIsLoading(false);
+    setIsPhotosSent(true);
   };
   const handleSelectedPhoneNumbersFromChild = (
     users: Map<string, AvailableUser[]>
@@ -116,7 +119,10 @@ export const PhotosInput = () => {
   }, []);
   return (
     <section className="photos-input">
-      {alertMessage && <Alert message={alertMessage} />}
+      {alertMessage && <Alert message={alertMessage} isError={true} />}
+      {isPhotosSent && (
+        <Alert message="Photos sent successfully" isError={false} />
+      )}
       <div className="container">
         <div className="photos-input__inner">
           <div className="photos-input__header">

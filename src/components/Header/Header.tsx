@@ -1,6 +1,6 @@
 import { useState } from "react";
-import PhotoDropLogo from "../../public/photoDropLogo.svg";
-import UserIcon from "../../public/userIcon.svg";
+import PhotoDropLogo from "../../../public/photoDropLogo.svg";
+import UserIcon from "/userIcon.svg";
 import { AUTH_TOKEN_KEY } from "@/enums/authTokenKey";
 import { useNavigate } from "react-router-dom";
 export const Header = () => {

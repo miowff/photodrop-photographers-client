@@ -69,7 +69,7 @@ export const LoginForm = () => {
   return (
     <div className="login-form">
       <div className="container">
-        {showAlert && <Alert message={alertMessage} />}
+        {showAlert && <Alert message={alertMessage} isError={true} />}
         <div className="login-form__inner-content">
           <div className="login-form__title-container">
             <h4 className="login-form__title">Welcome </h4>

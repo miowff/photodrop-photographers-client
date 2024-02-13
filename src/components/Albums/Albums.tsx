@@ -1,11 +1,11 @@
 import { AlbumModel } from "@/models/album";
-import GalleryIcon from "../../public/gallery.svg";
-import { Album } from "./Album/Album";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BaseError } from "@/models/error";
 import { getAlbums } from "@/api";
-import { CreateAlbum } from "../CreateAlbum/CreateAlbum";
+import { CreateAlbum } from "../createAlbum/CreateAlbum";
+import { Album } from "./album/Album";
+import { GallerySvg } from "../../../public/svg/GallerySvg";
 export const Albums = () => {
   const navigate = useNavigate();
   const [albums, setAlbums] = useState<AlbumModel[]>([]);
@@ -37,7 +37,7 @@ export const Albums = () => {
         <div className="container">
           <div className="albums__inner">
             <div className="albums__header">
-              <img className="albums__header-icon" src={GalleryIcon} />
+              <GallerySvg />
               <h1 className="albums__title">Albums</h1>
             </div>
             <div className="albums__controls">

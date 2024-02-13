@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import close from "../../public/close.svg";
+import close from "/close.svg";
 import { AlbumModel, CreateAlbumModel } from "@/models/album";
 import { format } from "date-fns";
 import { addAlbum } from "@/api";
@@ -45,16 +45,19 @@ export const CreateAlbum = ({ setFormOpen, albums }: Props) => {
     <div className="create-album form-container">
       <div className="container">
         <div className="create-album__inner" ref={ref}>
-          <span className="create-album__close">
-            <img
-              className="create-album__close-svg"
-              src={close}
-              onClick={() => {
-                setFormOpen(false);
-              }}
-            />
-          </span>
           <form className="create-album__form" onSubmit={handleAddAlbum}>
+            <div className="create-album__form-title">
+              <h1 className="create-album__form-header">Add album</h1>
+              <span className="create-album__close">
+                <img
+                  className="create-album__close-svg"
+                  src={close}
+                  onClick={() => {
+                    setFormOpen(false);
+                  }}
+                />
+              </span>
+            </div>
             <input
               className="create-album__input"
               placeholder="Title"

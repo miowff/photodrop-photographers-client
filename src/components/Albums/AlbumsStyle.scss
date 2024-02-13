@@ -19,6 +19,13 @@
 
     &__controls {
         margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        border: 1px solid black;
+        border-radius: 16px;
+        padding: 15px;
+        max-width: 250px;
     }
 
     &__control-button {
