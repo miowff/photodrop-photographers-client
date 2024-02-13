@@ -2,11 +2,11 @@
 @import 'fonts';
 @import 'reset';
 @import 'global';
-@import "../components/loginForm/LoginForm.scss";
-@import "../components/alert/Alert.scss";
+@import "../components/loginForm/LoginFormStyle.scss";
+@import "../components/alert/AlertStyle.scss";
 @import "../components/header/HeaderStyle.scss";
 @import "../components/albums/AlbumsStyle.scss";
 @import "../components/albums/albumCard/AlbumStyle.scss";
-@import "../components/createAlbum/CreateAlbum.scss";
-@import "../components/photosInput/PhotosInput.scss";
-@import "../components/photosInput/addUsers/AddUsers.scss";
+@import "../components/createAlbum/CreateAlbumStyle.scss";
+@import "../components/photosInput/PhotosInputStyle.scss";
+@import "../components/photosInput/addUsers/AddUsersStyle.scss";
