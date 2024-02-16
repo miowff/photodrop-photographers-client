@@ -42,4 +42,9 @@
         border-radius: 16px;
         margin-bottom: 10px;
     }
+
+    &__numbers-list {
+        max-height: 250px;
+        overflow-y: scroll;
+    }
 }

@@ -69,7 +69,7 @@ export const PhotosInput = () => {
     setTimeout(async () => {
       await attachUsersToPhoto(attachUsersRequest);
       console.log("Attached users to photo");
-    }, 5000);
+    }, 10000);
     setSelectedImages([]);
     setIsLoading(false);
     setIsPhotosSent(true);
