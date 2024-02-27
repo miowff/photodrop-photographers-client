@@ -24,6 +24,7 @@ export const LoginForm = () => {
       setIsDataSending(true);
       const token = await signIn({ password, login });
       localStorage.setItem(AUTH_TOKEN_KEY, token);
+      localStorage.setItem("username", login);
       setIsDataSending(false);
       navigate("/");
     } catch (error) {
@@ -36,6 +37,7 @@ export const LoginForm = () => {
       setIsDataSending(true);
       const token = await signIn({ password, login });
       localStorage.setItem(AUTH_TOKEN_KEY, token);
+      localStorage.setItem("username", login);
       setIsDataSending(false);
       navigate("/");
     } catch (error) {
@@ -72,22 +74,24 @@ export const LoginForm = () => {
         {showAlert && <Alert message={alertMessage} isError={true} />}
         <div className="login-form__inner-content">
           <div className="login-form__title-container">
-            <h4 className="login-form__title">Welcome </h4>
+            <h4 className="login-form__title">Sign in </h4>
           </div>
           <form className="login-form__inputs" onSubmit={handleLogin}>
+            <p className="login-form__text">Username:</p>
             <input
               className="login-form__input-login login-form__input"
-              placeholder="Login"
+              placeholder="jhondoe"
               required
               value={login}
               onChange={(e) => {
                 setLogin(e.target.value);
               }}
             ></input>
+            <p className="login-form__text">Password:</p>
             <input
               className="login-form__input-password login-form__input"
-              placeholder="Password"
               type="password"
+              placeholder="password"
               required
               value={password}
               onChange={(e) => {
@@ -102,7 +106,7 @@ export const LoginForm = () => {
                 }
                 type="submit"
               >
-                Login
+                Sign in
               </button>
             </div>
           </form>

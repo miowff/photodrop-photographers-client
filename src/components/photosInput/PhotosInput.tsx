@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import Close from "/close.svg";
-import AddMembers from "/members-add-users.svg";
 import { AvailableUser } from "@/models/user";
 import { attachUsersToPhoto, getAvailableNumbers } from "@/api";
 import { uploadPhotos } from "@/utils/photosUploader";
 import { AttachUsersToPhoto } from "@/models/photo";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { Alert } from "../alert/Alert";
 import { AddUsers } from "../photosInput/addUsers/AddUsers";
 
 export const PhotosInput = () => {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
+  const name = searchParams.get("name");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isUserSelectionVisible, setIsSectionVisible] = useState(false);
   const [isPhotosSent, setIsPhotosSent] = useState(false);
@@ -68,6 +68,7 @@ export const PhotosInput = () => {
     });
     setTimeout(async () => {
       await attachUsersToPhoto(attachUsersRequest);
+      console.log(attachUsersRequest);
       console.log("Attached users to photo");
     }, 10000);
     setSelectedImages([]);
@@ -125,81 +126,110 @@ export const PhotosInput = () => {
       <div className="container">
         <div className="photos-input__inner">
           <div className="photos-input__header">
-            <h1 className="photos-input__title">Add Photos</h1>
-          </div>
-          <div className="photos-input__controls">
-            <div className="photos-input__input-wrapper">
-              <span className="label">
-                <a>Select</a>
-              </span>
-              <input
-                className="photos-input__input-photos"
-                type="file"
-                placeholder="Upload photos"
-                multiple
-                onChange={handleImageChange}
-                disabled={isLoading}
-              ></input>
+            <h1 className="photos-input__title">{name}</h1>
+            <div className="photos-input__controls">
+              <div className="photos-input__input-wrapper">
+                <span className="label">
+                  <a>Select</a>
+                </span>
+                <input
+                  className="photos-input__input-photos"
+                  type="file"
+                  placeholder="Upload photos"
+                  multiple
+                  onChange={handleImageChange}
+                  disabled={isLoading}
+                ></input>
+              </div>
+              <button
+                className="photos-input__clear photos-input__control-button"
+                disabled={selectedImages.length == 0 || isLoading}
+                onClick={handleClearPhotos}
+              >
+                Clear
+              </button>
+              <button
+                className="photos-input__clear photos-input__control-button"
+                disabled={selectedImages.length == 0 || isLoading}
+                onClick={handleUploadClick}
+              >
+                Upload
+              </button>
             </div>
-            <button
-              className="photos-input__clear photos-input__control-button"
-              disabled={selectedImages.length == 0 || isLoading}
-              onClick={handleClearPhotos}
-            >
-              Clear
-            </button>
-            <button
-              className="photos-input__clear photos-input__control-button"
-              disabled={selectedImages.length == 0 || isLoading}
-              onClick={handleUploadClick}
-            >
-              Upload
-            </button>
           </div>
-          <div className="photos-input__photos-grid">
-            {selectedImages.map((image, index) => {
-              return (
-                <div className="photos-input__photo-container" key={index}>
-                  {isUserSelectionVisible && selectedImageIndex === index && (
-                    <div className="photos-input__user-selection">
-                      <AddUsers
-                        users={users}
-                        onClose={handleCloseForm}
-                        photoKey={image.name}
-                        existingUsersPhoto={selectedUsers}
-                        onSelectedPhoneNumbers={
-                          handleSelectedPhoneNumbersFromChild
-                        }
-                      />
-                    </div>
-                  )}
-                  <img
-                    src={URL.createObjectURL(image)}
-                    alt={`Image ${index}`}
-                  />
 
-                  <div className="photos-input__photo-controls">
-                    <button
-                      className="photos-input__remove-control"
-                      onClick={() => handleImageRemove(index)}
-                    >
-                      <img src={Close} alt="Remove" />
-                    </button>
-                    <button
-                      className="photos-input__add-user-control"
-                      onClick={() => handleAddMembersButtonClick(index)}
-                    >
-                      <img
-                        className="photos-input__add-user-control-icon"
-                        src={AddMembers}
-                        alt="Add Members"
-                      />
-                    </button>
+          {selectedImages.length > 0 && (
+            <div className="photos-input__photos-grid">
+              {selectedImages.map((image, index) => {
+                return (
+                  <div className="photos-input__photo-container" key={index}>
+                    {isUserSelectionVisible && selectedImageIndex === index && (
+                      <div className="photos-input__user-selection">
+                        <AddUsers
+                          users={users}
+                          onClose={handleCloseForm}
+                          photoKey={image.name}
+                          existingUsersPhoto={selectedUsers}
+                          onSelectedPhoneNumbers={
+                            handleSelectedPhoneNumbersFromChild
+                          }
+                        />
+                      </div>
+                    )}
+                    <img
+                      src={URL.createObjectURL(image)}
+                      alt={`Image ${index}`}
+                    />
+
+                    <div className="photos-input__photo-controls">
+                      <button
+                        className="photos-input__remove-control photos-input__photo-control-button"
+                        onClick={() => handleImageRemove(index)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-x"
+                        >
+                          <path d="M18 6 6 18" />
+                          <path d="m6 6 12 12" />
+                        </svg>
+                      </button>
+                      <button
+                        className="photos-input__add-user-control photos-input__photo-control-button"
+                        onClick={() => handleAddMembersButtonClick(index)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-user-round-plus"
+                        >
+                          <path d="M2 21a8 8 0 0 1 13.292-6" />
+                          <circle cx="10" cy="8" r="5" />
+                          <path d="M19 16v6" />
+                          <path d="M22 19h-6" />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
     </section>

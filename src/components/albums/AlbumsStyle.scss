@@ -1,10 +1,17 @@
 .albums {
+    margin-top: 50px;
+
     &__header {
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 15px;
         align-self: flex-start;
+        align-items: center;
+        background-color: #F4F4F4;
+        justify-content: space-between;
+        border-radius: 10px;
+        border: 1px solid #EEEEEE;
     }
 
     &__header-icon {
@@ -13,23 +20,25 @@
     }
 
     &__title {
-        font-family: TerminaBold, FuturaPtDemi;
+        margin-left: 10px;
+        font-family: FuturaPtMedium;
         font-size: 30px;
     }
 
     &__controls {
-        margin-top: 10px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 10px;
         display: flex;
         flex-direction: row;
-        gap: 15px;
-        border: 1px solid black;
+        gap: 20px;
         border-radius: 16px;
-        padding: 15px;
         max-width: 250px;
     }
 
     &__control-button {
-        width: 65px;
+        padding-left: 15px;
+        padding-right: 15px;
         height: 30px;
         font-family: FuturaPtMedium;
         text-align: center;
@@ -45,17 +54,63 @@
         background-color: #C6C6C6;
     }
 
+    &__search {
+        padding: 5px;
+        border-radius: 10px;
+        border: 1px solid #EEEEEE;
+    }
+
+    &__column-box {
+        width: 35%;
+        height: 100%;
+        text-align: center;
+    }
+
+    &__columns {
+        font-family: FuturaPtMedium;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 0 10px 10px;
+        font-size: 24px;
+    }
+
     &__albums-list {
         margin: 0 auto;
         margin-top: 20px;
-        display: grid;
         gap: 10px;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        background-color: #F4F4F4;
+        border: 1px solid #EEEEEE;
+        padding: 15px;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__control-button-active {
+        background-color: #3300CC;
+        color: white;
+    }
+
+    &__search-box {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        justify-content: center;
+        font-family: FuturaPtMedium;
     }
 }
 
 @media (max-width:1024px) {
     .album {
         margin: 0 auto;
+    }
+}
+
+@media (max-width:630px) {
+    .albums {
+        &__header {
+            flex-direction: column;
+        }
     }
 }

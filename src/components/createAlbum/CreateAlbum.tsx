@@ -46,17 +46,17 @@ export const CreateAlbum = ({ setFormOpen, albums }: Props) => {
       <div className="container">
         <div className="create-album__inner" ref={ref}>
           <form className="create-album__form" onSubmit={handleAddAlbum}>
+            <span className="create-album__close">
+              <img
+                className="create-album__close-svg"
+                src={close}
+                onClick={() => {
+                  setFormOpen(false);
+                }}
+              />
+            </span>
             <div className="create-album__form-title">
               <h1 className="create-album__form-header">Add album</h1>
-              <span className="create-album__close">
-                <img
-                  className="create-album__close-svg"
-                  src={close}
-                  onClick={() => {
-                    setFormOpen(false);
-                  }}
-                />
-              </span>
             </div>
             <input
               className="create-album__input"

@@ -1,13 +1,13 @@
-import { useState } from "react";
-import PhotoDropLogo from "/photoDropLogo.svg";
-import UserIcon from "/userIcon.svg";
 import { AUTH_TOKEN_KEY } from "@/enums/authTokenKey";
-import { useNavigate } from "react-router-dom";
+import PhotoDropLogo from "/photoDropLogo.svg";
+import { useLocation, useNavigate } from "react-router-dom";
 export const Header = () => {
+  const location = useLocation();
   const navigate = useNavigate();
-  const [isUserControlsVisible, setIsUserControlsVisible] = useState(false);
+  const username = localStorage.getItem("username") as string;
   const handleLogOut = () => {
     localStorage.removeItem(AUTH_TOKEN_KEY);
+    localStorage.removeItem("username");
     navigate("/login");
   };
   return (
@@ -21,25 +21,14 @@ export const Header = () => {
               navigate("/");
             }}
           />
-          <div className="header__user">
-            <img
-              className="header__user-icon"
-              src={UserIcon}
-              onClick={() => {
-                setIsUserControlsVisible(!isUserControlsVisible);
-              }}
-            />
-            {isUserControlsVisible && (
-              <div className="header__user-controls">
-                <button
-                  className="header__user-controls-button"
-                  onClick={handleLogOut}
-                >
-                  Log Out
-                </button>
-              </div>
-            )}
-          </div>
+          {location.pathname !== "/login" && (
+            <div className="header__user">
+              <p className="header__user-name">({username}) </p>
+              <p className="header__user-exit" onClick={handleLogOut}>
+                Exit
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </header>

@@ -1,10 +1,10 @@
 .add-users {
     z-index: 150;
     position: absolute;
-    background-color: rgb(231, 231, 231);
+    background-color: #F4F4F4;
+    border: 1px solid #EEEEEE;
     padding: 10px;
     box-shadow: 10px 5px 5px gray;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     font-family: FuturaPtMedium;
@@ -47,4 +47,19 @@
         max-height: 250px;
         overflow-y: scroll;
     }
+
+    &__search-input {
+        border: 1px solid #EEEEEE;
+
+
+    }
+}
+
+.add-users__numbers-list {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.add-users__numbers-list::-webkit-scrollbar {
+    display: none;
 }

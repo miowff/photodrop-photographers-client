@@ -23,7 +23,6 @@
         display: flex;
         flex-direction: column;
         gap: 15px;
-        margin-top: 30px;
     }
 
     &__input {
@@ -34,9 +33,9 @@
         color: #262626;
         font-size: 20px;
         padding-left: 13px;
-        border: 1px solid gray;
-        border-radius: 30px;
-        position: relative;
+        border: 1px solid #EEEEEE;
+        border-radius: 8px;
+        background-color: #F4F4F4;
     }
 
     &__button {
@@ -68,13 +67,11 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        justify-content: center;
     }
 
     &__form-header {
-        margin: 0 auto;
-        font-family: TerminaBold, FuturaPtDemi;
-        font-size: 24px;
+        font-family: FuturaPtMedium;
+        font-size: 30px;
     }
 }
 

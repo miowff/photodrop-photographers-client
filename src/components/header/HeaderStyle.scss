@@ -13,7 +13,16 @@
     }
 
     &__user {
+        font-family: FuturaPtDemi;
         position: relative;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+    }
+
+    &__user-name {
+        opacity: 0.5;
     }
 
     &__user-icon {
@@ -27,6 +36,10 @@
         right: -25px;
         font-family: FuturaPtMedium;
         border: none;
+    }
+
+    &__user-exit {
+        cursor: pointer;
     }
 
     &__user-controls-button {

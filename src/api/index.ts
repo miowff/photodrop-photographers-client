@@ -27,7 +27,6 @@ export const addAlbum = async (
       Authorization: `Bearer ${authToken}`,
     },
   });
-  console.log(response);
   return response.data as AlbumModel;
 };
 export const signIn = async (loginRequest: LoginModel) => {
