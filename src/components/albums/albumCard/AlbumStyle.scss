@@ -1,9 +1,12 @@
 .album {
-    width: 100%;
+    width: 98%;
     border: 1px solid #e4e3e3;
     cursor: pointer;
     padding: 10px;
     font-size: 18px;
+    margin: 0 auto;
+    margin-bottom: 5px;
+    border-radius: 10px;
 
     &__content {
         display: flex;

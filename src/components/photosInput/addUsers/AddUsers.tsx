@@ -18,8 +18,11 @@ export const AddUsers = ({
   onSelectedPhoneNumbers,
 }: UsersProps) => {
   const ref = useRef(null);
+  const checkBoxRef = useRef<HTMLInputElement>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedUsers, setSelectedUsers] = useState<AvailableUser[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<AvailableUser[]>(
+    existingUsersPhoto.get(photoKey) || []
+  );
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
@@ -45,6 +48,7 @@ export const AddUsers = ({
   useHandleOutsideClick(ref, () => {
     onClose();
   });
+
   return (
     <div className="add-users" ref={ref}>
       <input
@@ -57,13 +61,17 @@ export const AddUsers = ({
       <div className="add-users__numbers-container">
         <ul className="add-users__numbers-list">
           {filteredUsers.map((user, index) => (
-            <li key={index}>
-              <input
-                type="checkbox"
-                onChange={() => handleCheckboxChange(user)}
-              />
-              <span>{user.number}</span>
-            </li>
+            <label key={index}>
+              <li>
+                <input
+                  ref={checkBoxRef}
+                  type="checkbox"
+                  checked={selectedUsers.includes(user)}
+                  onChange={() => handleCheckboxChange(user)}
+                />
+                <span className="add-users__number">{user.number}</span>
+              </li>
+            </label>
           ))}
         </ul>
       </div>

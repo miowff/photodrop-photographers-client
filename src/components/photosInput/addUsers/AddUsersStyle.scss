@@ -39,7 +39,8 @@
     }
 
     &__search-input {
-        border-radius: 16px;
+        padding: 5px;
+        border-radius: 10px;
         margin-bottom: 10px;
     }
 
@@ -48,11 +49,14 @@
         overflow-y: scroll;
     }
 
+    &__number {
+        cursor: pointer;
+    }
+
     &__search-input {
         border: 1px solid #EEEEEE;
-
-
     }
+
 }
 
 .add-users__numbers-list {

@@ -76,7 +76,7 @@
     }
 
     &__input-photos {
-        display: inline-block;
+        display: none;
         position: absolute;
         z-index: 1;
         width: 100%;
@@ -159,6 +159,10 @@
         height: 30px;
     }
 
+}
+
+.input-label {
+    z-index: 100;
 }
 
 @media (max-width:630px) {

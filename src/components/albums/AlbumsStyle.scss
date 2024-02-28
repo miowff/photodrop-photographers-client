@@ -78,11 +78,10 @@
     &__albums-list {
         margin: 0 auto;
         margin-top: 20px;
-        gap: 10px;
         background-color: #F4F4F4;
         border: 1px solid #EEEEEE;
-        padding: 15px;
         border-radius: 16px;
+        gap: 5px;
         display: flex;
         flex-direction: column;
     }

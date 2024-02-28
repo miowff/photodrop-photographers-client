@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AvailableUser } from "@/models/user";
 import { attachUsersToPhoto, getAvailableNumbers } from "@/api";
 import { uploadPhotos } from "@/utils/photosUploader";
@@ -23,16 +23,15 @@ export const PhotosInput = () => {
   const [selectedUsers, setSelectedUsers] = useState<
     Map<string, AvailableUser[]>
   >(new Map());
+  const inputRef = useRef<HTMLInputElement>(null);
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
       const newSelectedImages: File[] = [];
-
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
         newSelectedImages.push(file);
       }
-
       setSelectedImages((prevSelectedImages) => [
         ...prevSelectedImages,
         ...newSelectedImages,
@@ -84,10 +83,11 @@ export const PhotosInput = () => {
     setSelectedImages([]);
     setSelectedImageIndex(null);
   };
-  const handleImageRemove = (index: number) => {
-    const updatedImages = [...selectedImages];
-    updatedImages.splice(index, 1);
+  const handleImageRemove = (index: number, itemName: string) => {
     selectedUsers.delete(selectedImages[index].name);
+    const updatedImages = selectedImages.filter(
+      (item) => item.name !== itemName
+    );
     setSelectedImages(updatedImages);
     if (index === selectedImageIndex) {
       setSelectedImageIndex(null);
@@ -129,7 +129,12 @@ export const PhotosInput = () => {
             <h1 className="photos-input__title">{name}</h1>
             <div className="photos-input__controls">
               <div className="photos-input__input-wrapper">
-                <span className="label">
+                <span
+                  className="input-label"
+                  onClick={() => {
+                    inputRef.current?.click();
+                  }}
+                >
                   <a>Select</a>
                 </span>
                 <input
@@ -139,6 +144,7 @@ export const PhotosInput = () => {
                   multiple
                   onChange={handleImageChange}
                   disabled={isLoading}
+                  ref={inputRef}
                 ></input>
               </div>
               <button
@@ -184,7 +190,7 @@ export const PhotosInput = () => {
                     <div className="photos-input__photo-controls">
                       <button
                         className="photos-input__remove-control photos-input__photo-control-button"
-                        onClick={() => handleImageRemove(index)}
+                        onClick={() => handleImageRemove(index, image.name)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
