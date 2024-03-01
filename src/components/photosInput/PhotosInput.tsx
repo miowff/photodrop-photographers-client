@@ -32,6 +32,8 @@ export const PhotosInput = () => {
         const file = files[i];
         newSelectedImages.push(file);
       }
+      console.log(newSelectedImages);
+      console.log(selectedImages);
       setSelectedImages((prevSelectedImages) => [
         ...prevSelectedImages,
         ...newSelectedImages,
@@ -67,8 +69,6 @@ export const PhotosInput = () => {
     });
     setTimeout(async () => {
       await attachUsersToPhoto(attachUsersRequest);
-      console.log(attachUsersRequest);
-      console.log("Attached users to photo");
     }, 10000);
     setSelectedImages([]);
     setIsLoading(false);
@@ -81,7 +81,6 @@ export const PhotosInput = () => {
   };
   const handleClearPhotos = () => {
     setSelectedImages([]);
-    setSelectedImageIndex(null);
   };
   const handleImageRemove = (index: number, itemName: string) => {
     selectedUsers.delete(selectedImages[index].name);
@@ -143,6 +142,10 @@ export const PhotosInput = () => {
                   placeholder="Upload photos"
                   multiple
                   onChange={handleImageChange}
+                  onClick={(event) => {
+                    const target = event.currentTarget as HTMLInputElement;
+                    target.value = ""; 
+                  }}
                   disabled={isLoading}
                   ref={inputRef}
                 ></input>

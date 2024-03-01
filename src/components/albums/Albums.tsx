@@ -9,8 +9,9 @@ import { AlbumCard } from "../albums/albumCard/AlbumCard";
 export const Albums = () => {
   const navigate = useNavigate();
   const [albums, setAlbums] = useState<AlbumModel[]>([]);
+  const [isAlbumsFetching, setIsAlbumsFetching] = useState<boolean>(false);
   const [newestActive, setNewestActive] = useState<boolean>(false);
-  const [oldestActive, setOldestActive] = useState<boolean>(false);
+  const [oldestActive, setOldestActive] = useState<boolean>(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [isCreateAlbumActive, setIsCreateAlbumActive] =
     useState<boolean>(false);
@@ -21,6 +22,7 @@ export const Albums = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsAlbumsFetching(true);
         const albums = await getAlbums();
         setAlbums(albums);
       } catch (err) {
@@ -32,6 +34,7 @@ export const Albums = () => {
           console.error("Error fetching data:", err);
         }
       }
+      setIsAlbumsFetching(false);
     };
     fetchData();
   }, [navigate]);
@@ -125,9 +128,19 @@ export const Albums = () => {
                   <p className="albums__column-date">Created at</p>
                 </div>
               </div>
-              {filteredAlbums.map((album, key) => {
-                return <AlbumCard album={album} key={key} />;
-              })}
+              {filteredAlbums.length === 0 ? (
+                <>
+                  {!isAlbumsFetching && (
+                    <p className="albums__no-albums">No albums were found</p>
+                  )}
+                </>
+              ) : (
+                <>
+                  {filteredAlbums.map((album, key) => {
+                    return <AlbumCard album={album} key={key} />;
+                  })}
+                </>
+              )}
             </ul>
           </div>
         </div>

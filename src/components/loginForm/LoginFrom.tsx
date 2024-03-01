@@ -6,7 +6,7 @@ import {
   USER_NOT_FOUND,
 } from "@/enums/errorMessages";
 import { BaseError } from "@/models/error";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "../alert/Alert";
 import { useHandleEnterPush } from "@/hooks/handleEnterPush";
@@ -18,6 +18,8 @@ export const LoginForm = () => {
   const [alertMessage, setAlertMessage] = useState<string>("");
   const [showAlert, setShowAlert] = useState<boolean>(false);
   const [isDataSending, setIsDataSending] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -68,6 +70,10 @@ export const LoginForm = () => {
       setShowAlert(false);
     }, 1800);
   };
+  useEffect(() => {
+    console.log("xzc")
+    inputRef.current?.focus();
+  }, []);
   return (
     <div className="login-form">
       <div className="container">
@@ -79,8 +85,9 @@ export const LoginForm = () => {
           <form className="login-form__inputs" onSubmit={handleLogin}>
             <p className="login-form__text">Username:</p>
             <input
+              ref={inputRef}
               className="login-form__input-login login-form__input"
-              placeholder="jhondoe"
+              placeholder="username"
               required
               value={login}
               onChange={(e) => {
