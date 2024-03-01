@@ -1,6 +1,5 @@
-
 export interface PhotoData {
-  albumId: number;
+  albumId: string;
   name: string;
   type: string;
 }

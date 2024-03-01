@@ -5,9 +5,8 @@ import axios from "axios";
 
 export const uploadPhotos = async (
   selectedImages: File[],
-  id: string
+  albumId: string
 ): Promise<AttachPhotoInfo[]> => {
-  const albumId = parseInt(id);
   const photosData: PhotoData[] = selectedImages.map((photo) => {
     const { type, name } = photo;
     return { type, albumId, name };
@@ -26,7 +25,7 @@ export const uploadPhotos = async (
           const splittedKey = value.split("/") as string[];
           attachPhotosData.push({
             id: splittedKey[splittedKey.length - 1],
-            albumId,
+            albumId: parseInt(albumId),
             realName: url.realName,
           });
         }
