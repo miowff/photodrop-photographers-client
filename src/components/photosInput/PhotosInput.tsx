@@ -30,7 +30,12 @@ export const PhotosInput = () => {
       const newSelectedImages: File[] = [];
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        newSelectedImages.push(file);
+        const isContains = selectedImages.find((selectedImage) => {
+          return selectedImage.name === file.name;
+        });
+        if (!isContains) {
+          newSelectedImages.push(file);
+        }
       }
       console.log(newSelectedImages);
       console.log(selectedImages);
@@ -144,7 +149,7 @@ export const PhotosInput = () => {
                   onChange={handleImageChange}
                   onClick={(event) => {
                     const target = event.currentTarget as HTMLInputElement;
-                    target.value = ""; 
+                    target.value = "";
                   }}
                   disabled={isLoading}
                   ref={inputRef}
