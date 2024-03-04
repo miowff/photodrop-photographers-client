@@ -93,6 +93,7 @@ export const LoginForm = () => {
               onChange={(e) => {
                 setLogin(e.target.value);
               }}
+              
             ></input>
             <p className="login-form__text">Password:</p>
             <input

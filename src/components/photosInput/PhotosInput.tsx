@@ -37,8 +37,6 @@ export const PhotosInput = () => {
           newSelectedImages.push(file);
         }
       }
-      console.log(newSelectedImages);
-      console.log(selectedImages);
       setSelectedImages((prevSelectedImages) => [
         ...prevSelectedImages,
         ...newSelectedImages,
