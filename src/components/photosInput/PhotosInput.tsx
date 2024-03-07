@@ -161,7 +161,7 @@ export const PhotosInput = () => {
                 Clear
               </button>
               <button
-                className="photos-input__clear photos-input__control-button"
+                className="photos-input__upload photos-input__control-button"
                 disabled={selectedImages.length == 0 || isLoading}
                 onClick={handleUploadClick}
               >

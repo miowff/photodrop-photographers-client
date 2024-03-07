@@ -21,7 +21,8 @@
 
     &__title {
         margin-left: 10px;
-        font-family: FuturaPtMedium;
+        font-family: "Inter";
+        font-family: 800;
         font-size: 30px;
     }
 
@@ -31,7 +32,7 @@
         padding-right: 10px;
         display: flex;
         flex-direction: row;
-        gap: 20px;
+        gap: 5px;
         border-radius: 16px;
         max-width: 250px;
     }
@@ -40,18 +41,21 @@
         padding-left: 15px;
         padding-right: 15px;
         height: 30px;
-        font-family: FuturaPtMedium;
+        font-family: "Inter";
+        font-weight: 500;
         text-align: center;
         border: none;
         border-radius: 16px;
     }
 
     &__add-button {
-        background-color: #89CFF0;
+        border: 1px solid #3300CC;
+        color: #3300CC;
     }
 
     &__sort-button {
-        background-color: #C6C6C6;
+        background-color: #fafafa;
+        border: 1px solid #EEEEEE;
     }
 
     &__search {
@@ -67,7 +71,7 @@
     }
 
     &__columns {
-        font-family: FuturaPtMedium;
+        font-family: "Inter";
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -78,9 +82,11 @@
     &__no-albums {
         font-size: 24px;
         text-align: center;
-        font-family: FuturaPtMedium;
+        font-family: "Inter";
         opacity: 0.5;
         padding-bottom: 10px;
+        margin-top: 40px;
+        margin-bottom: 40px;
     }
 
     &__albums-list {
@@ -89,9 +95,9 @@
         background-color: #F4F4F4;
         border: 1px solid #EEEEEE;
         border-radius: 16px;
-        gap: 5px;
         display: flex;
         flex-direction: column;
+        margin-bottom: 20px;
     }
 
     &__control-button-active {
@@ -104,7 +110,7 @@
         gap: 5px;
         align-items: center;
         justify-content: center;
-        font-family: FuturaPtMedium;
+        font-family: "Inter";
     }
 }
 

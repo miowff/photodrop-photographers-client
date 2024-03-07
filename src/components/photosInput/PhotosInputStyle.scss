@@ -18,15 +18,15 @@
 
     &__title {
         margin-left: 10px;
-        font-family: FuturaPtMedium;
+        font-family: "Inter";
         font-size: 30px;
     }
 
     &__controls {
         display: flex;
         flex-direction: row;
-        font-family: FuturaPtMedium;
-        gap: 15px;
+        font-family: "Inter";
+        gap: 5px;
         padding: 15px;
         border-radius: 16px;
         max-width: 250px;
@@ -36,11 +36,19 @@
         width: 65px;
         height: 30px;
         border: none;
-        background-color: #C6C6C6;
+        background-color: #fafafa;
+        border: 1px solid black;
         border-radius: 16px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    &__upload {
+        width: 70px;
     }
 
     &__control-button:disabled {
+        border: 1px solid rgb(171, 170, 170);
         opacity: 0.9;
     }
 
@@ -58,7 +66,8 @@
             display: inline-block;
             width: 65px;
             height: 30px;
-            background-color: #89CFF0;
+            border: 1px solid #3300CC;
+            color: #3300CC;
             display: flex;
             align-items: center;
             justify-content: center;

@@ -1,13 +1,13 @@
 .album {
     width: 98%;
     border: 1px solid #e4e3e3;
+    background-color: #fafafa;
     cursor: pointer;
     padding: 10px;
     font-size: 18px;
     margin: 0 auto;
-    margin-bottom: 5px;
     border-radius: 10px;
-
+    margin-bottom: 15px;
     &__content {
         display: flex;
         flex-direction: row;
@@ -22,7 +22,7 @@
     }
 
     &__info-box-right {
-        justify-content: center;
+        justify-content: end;
     }
 
     &__info-box-left {
@@ -40,7 +40,7 @@
 
     &__title {
         margin-left: 15px;
-        font-family: FuturaPtMedium;
+        font-family: "Inter";
         max-width: 200px;
         white-space: nowrap;
         overflow: hidden;
@@ -51,12 +51,13 @@
         max-width: 180px;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-family: FuturaPtMedium;
+        font-family: "Inter";
         display: flex;
     }
 
     &__date {
-        font-family: FuturaPtMedium;
+        font-family: "Inter";
+        margin-right: 10px;
         opacity: 0.7;
     }
 }

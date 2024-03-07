@@ -1,5 +1,5 @@
 import { AlbumModel } from "@/models/album";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 interface Props {
   album: AlbumModel;
@@ -37,7 +37,9 @@ export const AlbumCard = ({ album }: Props) => {
             <p className="album__location">{album.location}</p>
           </div>
           <div className="album__info-box album__info-box-right">
-            <p className="album__date">{format(album.date, "yyyy-MM-dd")}</p>
+            <p className="album__date">
+              {format(album.date, "do MMMM yyyy")}
+            </p>
           </div>
         </div>
       </div>
